@@ -3,10 +3,15 @@ def google(texto,senha):
     """Digite o texto que será traduzido"""
     from selenium import webdriver
     from selenium.webdriver.common.keys import Keys
+    
+    from selenium.webdriver.chrome.options import Options
+    
     import time
     from random import random
     
-
+    opt = Options()
+    opt.headless = True
+    
     chrome = webdriver.Chrome(executable_path=r'chromedriver.exe')
     chrome.get("https://educacional.fieg.com.br/")
 
@@ -27,9 +32,14 @@ def google(texto,senha):
     chrome.find_element_by_link_text('Planejamento e Controle da Manutenção').click() #click por link tag <a>
     tsl(2)
     chrome.find_element_by_xpath('//*[@id="onetopictabs"]/ul[1]/li[3]/a/div').click()
+    
+    time.sleep(10)
+    chrome.find_element_by_xpath('//*[@id="dropdown-1"]').click()
+    time.sleep(2)
+    chrome.find_element_by_xpath('//*[@id="action-menu-1-menu"]/a[7]').click()
     while True:
         time.sleep(10)
-        #chrome.close()
+        chrome.close()
 
 
 google(login,senha) #login e senha
